@@ -1,0 +1,14 @@
+services:
+  devenv:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: claude-devenv-standalone
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ~/.ssh:/home/developer/.ssh:ro
+    ports:
+      - "8085:8080"
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+    restart: unless-stopped
